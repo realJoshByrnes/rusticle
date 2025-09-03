@@ -11,5 +11,7 @@ fn main() {
         println!("cargo:rustc-link-arg=/MERGE:.pdata=.text");
         println!("cargo:rustc-link-arg=/STUB:dos_stub.bin");
         println!("cargo:rustc-link-arg=/EMITTOOLVERSIONINFO:NO");
+        println!("cargo:rustc-link-arg=/RELEASE");
+        println!("cargo:rustc-link-arg=/EMITPOGOPHASEINFO");
     }
 }
