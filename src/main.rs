@@ -5,12 +5,12 @@ use core::{ffi::c_void, panic::PanicInfo, ptr::null_mut};
 
 unsafe extern "system" {
     fn GetStdHandle(nStdHandle: u32) -> *mut c_void;
-    fn WriteConsoleA(
-        hConsoleOutput: *mut c_void,
+    fn WriteFile(
+        hFile: *mut c_void,
         lpBuffer: *const u8,
-        nNumberOfCharsToWrite: u32,
-        lpNumberOfCharsWritten: *mut u32,
-        lpReserved: *mut c_void,
+        nNumberOfBytesToWrite: u32,
+        lpNumberOfBytesWritten: *mut u32,
+        lpOverlapped: *mut c_void,
     ) -> i32;
     fn ExitProcess(uExitCode: u32) -> !;
 }
@@ -23,7 +23,7 @@ pub extern "C" fn mainCRTStartup() -> ! {
     unsafe {
         let handle = GetStdHandle(STD_OUTPUT_HANDLE);
         let mut written = 0;
-        WriteConsoleA(
+        WriteFile(
             handle,
             msg.as_ptr(),
             msg.len() as u32,

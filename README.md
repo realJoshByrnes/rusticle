@@ -35,6 +35,7 @@ This table tracks the evolution of Rusticle across versions, showing how each ch
 | v1.10.0 | Added custom 64-byte dummy DOS stub               |   1,064               |   1,000             |
 | v1.11.0 | Disabled Rich Header w/ `/EMITTOOLVERSIONINFO:NO` |   1,008               |     944             |
 | v1.12.0 | Added `/EMITPOGOPHASEINFO` - Removes PGO metadata |     712               |     680             |
+| v1.13.0 | Switched from `WriteConsoleA` to `WriteFile`      |     704               |     672             |
 
 <!-- cargo clean; $targets = @("x86_64-pc-windows-msvc", "i686-pc-windows-msvc"); foreach ($t in $targets) { cargo build --release --target $t; $exe = "target\$t\release\rusticle.exe"; Write-Host "$t`t$($(Get-Item $exe).Length) bytes" } -->
 
