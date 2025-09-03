@@ -6,5 +6,6 @@ fn main() {
         println!("cargo:rustc-link-arg=/SUBSYSTEM:CONSOLE");
         println!("cargo:rustc-link-lib=kernel32");
         println!("cargo:rustc-link-arg=/ALIGN:8");
+        println!("cargo:rustc-link-arg=/DEBUG:NONE");
     }
 }
