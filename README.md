@@ -1,8 +1,8 @@
-# RusticleExec
+# Rusticle
 
 **Minimal. Executable. Rusticle.**
 
-RusticleExec is a byte-sized Windows executable written in pure Rust, designed to explore how small a functional `.exe` can be—without sacrificing clarity, correctness, or control. This project began with a standard `cargo new` application that printed `"Hello, world!"`, producing a 134,144-byte binary on Windows (Rust 1.88.0). Through a series of deliberate, incremental changes, we reduced that footprint dramatically—without introducing any dependencies or compromising readability.
+Rusticle is a byte-sized Windows executable written in pure Rust, designed to explore how small a functional `.exe` can be—without sacrificing clarity, correctness, or control. This project began with a standard `cargo new` application that printed `"Hello, world!"`, producing a 134,144-byte binary on Windows (Rust 1.88.0). Through a series of deliberate, incremental changes, we reduced that footprint dramatically—without introducing any dependencies or compromising readability.
 
 Each commit in this repository represents a single optimization step, accompanied by a version bump and a clear explanation. From tuning compiler flags to removing the VC runtime, from stripping symbols to redefining the entry point, every decision was made with precision and purpose.
 
@@ -18,7 +18,7 @@ Each commit in this repository represents a single optimization step, accompanie
 
 ## 📊 Version History & Binary Size
 
-This table tracks the evolution of RusticleExec across versions, showing how each change impacted the final `.exe` size on both `x86_64` and `i686` architectures.
+This table tracks the evolution of Rusticle across versions, showing how each change impacted the final `.exe` size on both `x86_64` and `i686` architectures.
 
 | Version | Change Summary                                    | `x86_64` Size (bytes) | `i686` Size (bytes) |
 |---------|---------------------------------------------------|-----------------------|---------------------|
@@ -42,7 +42,7 @@ This table tracks the evolution of RusticleExec across versions, showing how eac
 
 ---
 
-## 🚀 What RusticleExec Demonstrates
+## 🚀 What Rusticle Demonstrates
 
 - How to build a minimal Windows executable in Rust
 - How to progressively reduce binary size without sacrificing clarity
@@ -53,6 +53,32 @@ This table tracks the evolution of RusticleExec across versions, showing how eac
 ## 📦 Final Outcome
 
 The final binary is a fraction of its original size, with no external dependencies, no runtime, and no standard library. It executes cleanly, exits predictably, and leaves behind nothing but admiration for what Rust can do when stripped to its essence.
+
+## 💡 Further reductions
+
+### Potential `.reloc` Section Removal (i686)
+
+The `.reloc` section currently occupies 56 bytes that can be removed
+
+- **16 bytes** of relocation data
+- **40 bytes** of section header metadata
+
+This section can be removed entirely by setting either of the following linker flags:
+
+```
+/FIXED
+/DYNAMICBASE:NO
+```
+
+Doing so disables relocation support, meaning the binary must be loaded at its preferred base address. This saves space and disables ASLR, which may be acceptable for ultra-minimal binaries.
+
+However, I’ve chosen **not** to apply these flags by default, because removing relocations can cause runtime failures if the preferred base address is already occupied. In such cases, the loader will fail with:
+
+```
+STATUS_CONFLICTING_ADDRESSES (0xC0000018)
+```
+
+This trade-off favors compatibility over minimal size in this build.
 
 ## 📄 License & Contributions
 
