@@ -37,6 +37,9 @@ This table tracks the evolution of Rusticle across versions, showing how each ch
 | v1.12.0 | Added `/EMITPOGOPHASEINFO` - Removes PGO metadata |     712               |     680             |
 | v1.13.0 | Switched from `WriteConsoleA` to `WriteFile`      |     704               |     672             |
 | v1.14.0 | Replaced `GetStdHandle` with pseudo-handle        |     664               |     640             |
+| v1.15.0 | Enforced fixed base address; disabled ASLR[^1]    |     664               |     584             |
+
+[^1]: Thanks to [/u/Mognakor/](https://www.reddit.com/user/Mognakor/) on Reddit for making me reconsider the /FIXED flag.
 
 <!-- cargo clean; $targets = @("x86_64-pc-windows-msvc", "i686-pc-windows-msvc"); foreach ($t in $targets) { cargo build --release --target $t; $exe = "target\$t\release\rusticle.exe"; Write-Host "$t`t$($(Get-Item $exe).Length) bytes" } -->
 
@@ -55,32 +58,6 @@ This table tracks the evolution of Rusticle across versions, showing how each ch
 ## 📦 Final Outcome
 
 The final binary is a fraction of its original size, with no external dependencies, no runtime, and no standard library. It executes cleanly, exits predictably, and leaves behind nothing but admiration for what Rust can do when stripped to its essence.
-
-## 💡 Further reductions
-
-### Potential `.reloc` Section Removal (i686)
-
-The `.reloc` section currently occupies 56 bytes that can be removed
-
-- **16 bytes** of relocation data
-- **40 bytes** of section header metadata
-
-This section can be removed entirely by setting either of the following linker flags:
-
-```
-/FIXED
-/DYNAMICBASE:NO
-```
-
-Doing so disables relocation support, meaning the binary must be loaded at its preferred base address. This saves space and disables ASLR, which may be acceptable for ultra-minimal binaries.
-
-However, I’ve chosen **not** to apply these flags by default, because removing relocations can cause runtime failures if the preferred base address is already occupied. In such cases, the loader will fail with:
-
-```
-STATUS_CONFLICTING_ADDRESSES (0xC0000018)
-```
-
-This trade-off favors compatibility over minimal size in this build.
 
 ## 📄 License & Contributions
 

@@ -14,5 +14,7 @@ fn main() {
         println!("cargo:rustc-link-arg=/EMITTOOLVERSIONINFO:NO");
         println!("cargo:rustc-link-arg=/RELEASE");
         println!("cargo:rustc-link-arg=/EMITPOGOPHASEINFO");
+        println!("cargo:rustc-link-arg=/FIXED");
+        println!("cargo:rustc-link-arg=/DYNAMICBASE:NO");
     }
 }
