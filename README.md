@@ -28,6 +28,7 @@ This table tracks the evolution of RusticleExec across versions, showing how eac
 | v1.3.0  | Switched panic strategy from unwind to abort      | 119,296               | 103,424             |
 | v1.4.0  | Switched to opt-level = "z" for size optimization | 115,200               |  99,328             |
 | v1.5.0  | Replaced main() with mainCRTStartup               | 105,984               |  91,136             |
+| v1.6.0  | Switched to no_std w/ Win32 API for print + exit  |   3,072               |   3,072             |
 
 <!-- cargo clean; $targets = @("x86_64-pc-windows-msvc", "i686-pc-windows-msvc"); foreach ($t in $targets) { cargo build --release --target $t; $exe = "target\$t\release\rusticle.exe"; Write-Host "$t`t$($(Get-Item $exe).Length) bytes" } -->
 

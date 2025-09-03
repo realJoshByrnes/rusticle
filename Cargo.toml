@@ -1,9 +1,12 @@
 [package]
 name = "rusticle"
-version = "1.5.0"
+version = "1.6.0"
 edition = "2024"
 
 [dependencies]
+
+[profile.dev]
+panic = "abort"            # Default: "unwind"
 
 [profile.release]
 opt-level = "z"            # Default: 3
