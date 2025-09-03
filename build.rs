@@ -9,5 +9,6 @@ fn main() {
         println!("cargo:rustc-link-arg=/DEBUG:NONE");
         println!("cargo:rustc-link-arg=/SAFESEH:NO");
         println!("cargo:rustc-link-arg=/MERGE:.pdata=.text");
+        println!("cargo:rustc-link-arg=/STUB:dos_stub.bin");
     }
 }
