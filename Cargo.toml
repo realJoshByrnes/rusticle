@@ -1,6 +1,6 @@
 [package]
 name = "rusticle"
-version = "1.2.0"
+version = "1.3.0"
 edition = "2024"
 
 [dependencies]
@@ -13,7 +13,7 @@ strip = "none"             # Default: "none"
 debug-assertions = false   # Default: false
 overflow-checks = false    # Default: false
 lto = true                 # Default: false
-panic = "unwind"           # Default: "unwind"
+panic = "abort"            # Default: "unwind"
 incremental = false        # Default: false
 codegen-units = 16         # Default: 16
 rpath = false              # Default: false

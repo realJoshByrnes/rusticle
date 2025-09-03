@@ -25,6 +25,7 @@ This table tracks the evolution of RusticleExec across versions, showing how eac
 | v1.0.0  | Initial `cargo new` project with `println!`     | 138,240               | 117,760             |
 | v1.1.0  | Built in release mode (`cargo build --release`) | 134,144               | 116,224             |
 | v1.2.0  | Enabled LTO for link-time optimization          | 122,368               | 105,472             |
+| v1.3.0  | Switched panic strategy from unwind to abort    | 119,296               | 103,424             |
 
 <!-- cargo clean; $targets = @("x86_64-pc-windows-msvc", "i686-pc-windows-msvc"); foreach ($t in $targets) { cargo build --release --target $t; $exe = "target\$t\release\rusticle.exe"; Write-Host "$t`t$($(Get-Item $exe).Length) bytes" } -->
 
