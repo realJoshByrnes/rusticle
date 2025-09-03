@@ -31,6 +31,7 @@ This table tracks the evolution of RusticleExec across versions, showing how eac
 | v1.6.0  | Switched to no_std w/ Win32 API for print + exit  |   3,072               |   3,072             |
 | v1.7.0  | Set `/ALIGN:8` to minimize alignment overhead.    |   1,296               |   1,176             |
 | v1.8.0  | Disabled debug info by setting `DEBUG:NONE`.      |   1,176               |   1,064             |
+| v1.9.0  | Merged `.pdata` into `.text` section              |   1,128               |   1,064             |
 
 <!-- cargo clean; $targets = @("x86_64-pc-windows-msvc", "i686-pc-windows-msvc"); foreach ($t in $targets) { cargo build --release --target $t; $exe = "target\$t\release\rusticle.exe"; Write-Host "$t`t$($(Get-Item $exe).Length) bytes" } -->
 

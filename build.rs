@@ -7,5 +7,7 @@ fn main() {
         println!("cargo:rustc-link-lib=kernel32");
         println!("cargo:rustc-link-arg=/ALIGN:8");
         println!("cargo:rustc-link-arg=/DEBUG:NONE");
+        println!("cargo:rustc-link-arg=/SAFESEH:NO");
+        println!("cargo:rustc-link-arg=/MERGE:.pdata=.text");
     }
 }
