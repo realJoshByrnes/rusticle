@@ -1,6 +1,19 @@
 [package]
 name = "rusticle"
-version = "1.1.0"
+version = "1.2.0"
 edition = "2024"
 
 [dependencies]
+
+[profile.release]
+opt-level = 3              # Default: 3
+debug = false              # Default: false
+split-debuginfo = "packed" # Default: "packed"
+strip = "none"             # Default: "none"
+debug-assertions = false   # Default: false
+overflow-checks = false    # Default: false
+lto = true                 # Default: false
+panic = "unwind"           # Default: "unwind"
+incremental = false        # Default: false
+codegen-units = 16         # Default: 16
+rpath = false              # Default: false
