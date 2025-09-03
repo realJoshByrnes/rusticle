@@ -4,7 +4,6 @@
 use core::{ffi::c_void, panic::PanicInfo, ptr::null_mut};
 
 unsafe extern "system" {
-    fn GetStdHandle(nStdHandle: u32) -> *mut c_void;
     fn WriteFile(
         hFile: *mut c_void,
         lpBuffer: *const u8,
@@ -21,7 +20,7 @@ const STD_OUTPUT_HANDLE: u32 = -11i32 as u32;
 pub extern "C" fn mainCRTStartup() -> ! {
     let msg = b"Hello, world!\n";
     unsafe {
-        let handle = GetStdHandle(STD_OUTPUT_HANDLE);
+        let handle = STD_OUTPUT_HANDLE as *mut c_void;
         let mut written = 0;
         WriteFile(
             handle,
