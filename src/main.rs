@@ -21,12 +21,11 @@ pub extern "C" fn mainCRTStartup() -> ! {
     let msg = b"Hello, world!\n";
     unsafe {
         let handle = STD_OUTPUT_HANDLE as *mut c_void;
-        let mut written = 0;
         WriteFile(
             handle,
             msg.as_ptr(),
             msg.len() as u32,
-            &mut written,
+            null_mut(),
             null_mut(),
         );
         ExitProcess(0)
