@@ -1,12 +1,17 @@
 fn main() {
     let profile = std::env::var("PROFILE").unwrap_or_default();
+    let bitness = std::env::var("CARGO_CFG_TARGET_POINTER_WIDTH").unwrap_or_default();
 
     println!("cargo:rustc-link-arg=/ENTRY:mainCRTStartup");
     println!("cargo:rustc-link-arg=/SUBSYSTEM:CONSOLE");
     println!("cargo:rustc-link-lib=kernel32");
 
     if profile == "release" {
-        println!("cargo:rustc-link-arg=/ALIGN:8");
+        if bitness == "32" {
+            println!("cargo:rustc-link-arg=/ALIGN:4");
+        } else {
+            println!("cargo:rustc-link-arg=/ALIGN:8");
+        }
         println!("cargo:rustc-link-arg=/DEBUG:NONE");
         println!("cargo:rustc-link-arg=/SAFESEH:NO");
         println!("cargo:rustc-link-arg=/MERGE:.pdata=.text");

@@ -38,6 +38,7 @@ This table tracks the evolution of Rusticle across versions, showing how each ch
 | v1.13.0 | Switched from `WriteConsoleA` to `WriteFile`      |     704               |     672             |
 | v1.14.0 | Replaced `GetStdHandle` with pseudo-handle        |     664               |     640             |
 | v1.15.0 | Enforced fixed base address; disabled ASLR[^1]    |     664               |     584             |
+| v1.16.0 | lowered /ALIGN to 4 bytes on 32-bit builds        |     664               |     580             |
 
 [^1]: Thanks to [/u/Mognakor/](https://www.reddit.com/user/Mognakor/) on Reddit for making me reconsider the /FIXED flag.
 
