@@ -16,15 +16,17 @@ unsafe extern "system" {
 
 const STD_OUTPUT_HANDLE: u32 = -11i32 as u32;
 
+#[unsafe(link_section = ".text")]
+pub static HELLO_WORLD_MESSAGE: [u8; 14] = *b"Hello, world!\n";
+
 #[unsafe(no_mangle)]
 pub extern "C" fn mainCRTStartup() -> u32 {
-    let msg = b"Hello, world!\n";
     unsafe {
         let handle = STD_OUTPUT_HANDLE as *mut c_void;
         WriteFile(
             handle,
-            msg.as_ptr(),
-            msg.len() as u32,
+            HELLO_WORLD_MESSAGE.as_ptr(),
+            HELLO_WORLD_MESSAGE.len() as u32,
             null_mut(),
             null_mut(),
         );
