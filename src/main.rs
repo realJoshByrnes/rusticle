@@ -3,6 +3,7 @@
 
 use core::{ffi::c_void, panic::PanicInfo, ptr::null_mut};
 
+#[link(name = "kernel32")]
 unsafe extern "system" {
     fn WriteFile(
         hFile: *mut c_void,
