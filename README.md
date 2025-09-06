@@ -43,6 +43,7 @@ This table tracks the evolution of Rusticle across versions, showing how each ch
 | v1.16.0 | lowered /ALIGN to 4 bytes on 32-bit builds        |     664               |     580             |
 | v1.17.0 | Pass NULL pointer for lpNumberOfBytesWritten      |     656               |     576             |
 | v1.18.0 | Specifying #[link(name = "kernel32")] explicitly  |     648               |     564             |
+| v1.19.0 | Return directly from entrypoint (mainCRTStartup)  |     616               |     540             |
 
 [^1]: Thanks to [/u/Mognakor/](https://www.reddit.com/r/rust/comments/1n7eknj/comment/nc71r70) on Reddit for making me reconsider the /FIXED flag.
 

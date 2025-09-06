@@ -12,13 +12,12 @@ unsafe extern "system" {
         lpNumberOfBytesWritten: *mut u32,
         lpOverlapped: *mut c_void,
     ) -> i32;
-    fn ExitProcess(uExitCode: u32) -> !;
 }
 
 const STD_OUTPUT_HANDLE: u32 = -11i32 as u32;
 
 #[unsafe(no_mangle)]
-pub extern "C" fn mainCRTStartup() -> ! {
+pub extern "C" fn mainCRTStartup() -> u32 {
     let msg = b"Hello, world!\n";
     unsafe {
         let handle = STD_OUTPUT_HANDLE as *mut c_void;
@@ -29,7 +28,8 @@ pub extern "C" fn mainCRTStartup() -> ! {
             null_mut(),
             null_mut(),
         );
-        ExitProcess(0)
+        // Returning 0 from mainCRTStartup is equivalent to calling ExitProcess(0) if only one thread is running.
+        0
     }
 }
 
