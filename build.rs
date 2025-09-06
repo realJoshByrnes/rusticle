@@ -3,7 +3,7 @@ fn main() {
     let bitness = std::env::var("CARGO_CFG_TARGET_POINTER_WIDTH").unwrap_or_default();
 
     println!("cargo:rustc-link-arg=/ENTRY:mainCRTStartup");
-    println!("cargo:rustc-link-arg=/SUBSYSTEM:CONSOLE");
+    println!("cargo:rustc-link-arg=/SUBSYSTEM:CONSOLE,5.01");
     println!("cargo:rustc-link-lib=kernel32");
 
     if profile == "release" {

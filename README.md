@@ -2,6 +2,8 @@
 
 **Minimal. Executable. Rusticle.**
 
+<img width="709" height="406" alt="Rusticle.exe on Windows XP" src="https://github.com/user-attachments/assets/68c7d34c-ed7a-4434-8830-2cbe429aa6aa" />
+
 Rusticle is a byte-sized Windows executable written in pure Rust, designed to explore how small a functional `.exe` can be—without sacrificing clarity, correctness, or control. This project began with a standard `cargo new` application that printed `"Hello, world!"`, producing a 134,144-byte binary on Windows (Rust 1.88.0). Through a series of deliberate, incremental changes, we reduced that footprint dramatically—without introducing any dependencies or compromising readability.
 
 Each commit in this repository represents a single optimization step, accompanied by a version bump and a clear explanation. From tuning compiler flags to removing the VC runtime, from stripping symbols to redefining the entry point, every decision was made with precision and purpose.
@@ -41,7 +43,7 @@ This table tracks the evolution of Rusticle across versions, showing how each ch
 | v1.16.0 | lowered /ALIGN to 4 bytes on 32-bit builds        |     664               |     580             |
 | v1.17.0 | Pass NULL pointer for lpNumberOfBytesWritten      |     656               |     576             |
 
-[^1]: Thanks to [/u/Mognakor/](https://www.reddit.com/user/Mognakor/) on Reddit for making me reconsider the /FIXED flag.
+[^1]: Thanks to [/u/Mognakor/](https://www.reddit.com/r/rust/comments/1n7eknj/comment/nc71r70) on Reddit for making me reconsider the /FIXED flag.
 
 <!-- cargo clean; $targets = @("x86_64-pc-windows-msvc", "i686-pc-windows-msvc"); foreach ($t in $targets) { cargo build --release --target $t; $exe = "target\$t\release\rusticle.exe"; Write-Host "$t`t$($(Get-Item $exe).Length) bytes" } -->
 
