@@ -6,7 +6,7 @@
 
 Rusticle is a byte-sized Windows executable written in pure Rust, designed to explore how small a functional `.exe` can be—without sacrificing clarity, correctness, or control. This project began with a standard `cargo new` application that printed `"Hello, world!"`, producing a 134,144-byte binary on Windows (Rust 1.88.0). Through a series of deliberate, incremental changes, we reduced that footprint dramatically—without introducing any dependencies or compromising readability.
 
-Each commit in this repository represents a single optimization step, accompanied by a version bump and a clear explanation. From tuning compiler flags to removing the VC runtime, from stripping symbols to redefining the entry point, every decision was made with precision and purpose.
+Each minor version introduced in this repository represents a single optimization step, accompanied by a clear explanation. From tuning compiler flags to removing the VC runtime, from stripping symbols to redefining the entry point, every decision was made with precision and purpose.
 
 ## 🧭 Guiding Principles
 
@@ -68,6 +68,6 @@ The final binary is a fraction of its original size, with no external dependenci
 
 ## 📄 License & Contributions
 
-This project is **unlicensed**. You are free to use, modify, distribute, or embed it however you like—no restrictions, no attribution required.
+This project is **unlicensed**. You are free to use, modify, distribute, or embed it however you like—no restrictions, attribution welcome but not required.
 
 **Pull requests are welcome.** Whether you're optimizing further, experimenting with new techniques, or just curious about byte-level Rust, feel free to contribute.
